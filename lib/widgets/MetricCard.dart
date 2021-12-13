@@ -2,10 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tonal_metrics_widget/styles.dart';
+import 'package:tonal_metrics_widget/viewModel/form_view_model.dart';
 import 'package:tonal_metrics_widget/widgets/MetricsWidget.dart';
 
 class MetricCard extends StatefulWidget {
-  const MetricCard({Key? key}) : super(key: key);
+  final FormViewModel vm;
+  const MetricCard({Key? key, required this.vm}) : super(key: key);
 
   @override
   _MetricCardState createState() => _MetricCardState();
@@ -20,15 +22,15 @@ class _MetricCardState extends State<MetricCard> {
   List<dynamic> _metricswidget = [
     {
       'title': 'Upper Body',
-      'image': MetricsWidget(),
+      // 'image': MetricsWidget(),
     },
     {
       'title': 'Core',
-      'image': MetricsWidget(),
+      // 'image': MetricsWidget(),
     },
     {
       'title': 'Lower Body',
-      'image': MetricsWidget(),
+      // 'image': MetricsWidget(),
     }
   ];
 
@@ -91,7 +93,7 @@ class _MetricCardState extends State<MetricCard> {
                                   margin: EdgeInsets.only(top: 10),
                                   clipBehavior: Clip.hardEdge,
                                   decoration: bubbleBoxDecoration,
-                                  child: MetricsWidget(),
+                                  child: MetricsWidget(vm: widget.vm),
                                 ),
                               ],
                             ),

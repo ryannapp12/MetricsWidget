@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tonal_metrics_widget/metricsForm.dart';
+import 'package:tonal_metrics_widget/viewModel/form_view_model.dart';
 import 'package:tonal_metrics_widget/widgets/MetricCard.dart';
-import 'package:tonal_metrics_widget/widgets/MetricsWidget.dart';
 import 'package:animate_do/animate_do.dart';
 
 void main() {
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: new MyHomePage(),
+      home: ChangeNotifierProvider(
+          create: (context) => FormViewModel(),
+          child: MyHomePage(),
+        ),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -44,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<FormViewModel>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
@@ -104,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                 height: 300.0,
                 alignment: FractionalOffset.center,
                 child: Container(
-                  child: MetricCard(),
+                  child: MetricCard(vm: vm),
                 ),
               ),
 
@@ -133,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                             ),
                           ],
                         ),
-                        child: MetricsForm(),
+                        child: MetricsForm(vm: vm),
                     ),
                   ),
                 ],

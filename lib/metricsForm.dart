@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tonal_metrics_widget/viewModel/form_view_model.dart';
 import 'package:tonal_metrics_widget/widgets/MetricsWidget.dart';
 import 'package:tonal_metrics_widget/widgets/showSnackBar.dart';
 
 class MetricsForm extends StatefulWidget {
-  const MetricsForm({Key? key}) : super(key: key);
-
+  final FormViewModel vm;
+  const MetricsForm({Key? key, required this.vm}) : super(key: key);
   @override
   _MetricsFormState createState() => _MetricsFormState();
 }
@@ -69,8 +70,9 @@ class _MetricsFormState extends State<MetricsForm> {
                   Map<String, Object> temp = new Map();
                   print("object");
                   if (editFlag) {
-                    temp["Label Name"] = labelInput.text;
-                    temp["Weight"] = weightInput.text;
+                    widget.vm.changeForm(labelInput.text, weightInput.text);
+                    // temp["Label Name"] = labelInput.text;
+                    // temp["Weight"] = weightInput.text;
                     showSnackBar("Successfully updated!", context);
                   }
                   setState(() {

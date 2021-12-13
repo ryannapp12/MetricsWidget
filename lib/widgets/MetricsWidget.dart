@@ -2,11 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:tonal_metrics_widget/metricsForm.dart';
 import 'package:tonal_metrics_widget/styles.dart';
+import 'package:tonal_metrics_widget/viewModel/form_view_model.dart';
 
 class MetricsWidget extends StatefulWidget {
-  const MetricsWidget({Key? key}) : super(key: key);
+  final FormViewModel vm;
+  const MetricsWidget({Key? key, required this.vm}) : super(key: key);
 
   @override
   _MetricsWidgetState createState() => _MetricsWidgetState();
@@ -20,6 +23,7 @@ class _MetricsWidgetState extends State<MetricsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<FormViewModel>(context);
     return Center(
       child: CircleAvatar(
         backgroundColor: Color.fromRGBO(61, 165, 148, 1.0),
@@ -37,7 +41,7 @@ class _MetricsWidgetState extends State<MetricsWidget> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(widgetTitle, style: labelTextStyle,),
+                    Text(vm.labelName, style: labelTextStyle,),
                   ],
                 )
             ),
@@ -49,7 +53,7 @@ class _MetricsWidgetState extends State<MetricsWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      weight.toString(),
+                      vm.weight,
                       style: weightTextStyle,
                     ),
                   ],
