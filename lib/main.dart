@@ -3,6 +3,7 @@ import 'package:tonal_metrics_widget/metricsForm.dart';
 import 'package:tonal_metrics_widget/widgets/MetricCard.dart';
 import 'package:tonal_metrics_widget/widgets/MetricsWidget.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: new MyHomePage(),
+      home: ChangeNotifierProvider(
+        create: (context) => MetricsModel(),
+        child: MyHomePage(),
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -34,8 +38,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
 
   var metricIndex = 0;
 
-  var currentColor = Color.fromRGBO(1, 0, 1, 1.0);
-
 
   @override
   void initState(){
@@ -44,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    final metricsModel = Provider.of<MetricsModel>(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
@@ -104,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                 height: 300.0,
                 alignment: FractionalOffset.center,
                 child: Container(
-                  child: MetricCard(),
+                  child: MetricCard(metricsModel: metricsModel,),
                 ),
               ),
 
@@ -133,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                             ),
                           ],
                         ),
-                        child: MetricsForm(),
+                        child: MetricsForm(metricsModel: metricsModel,),
                     ),
                   ),
                 ],

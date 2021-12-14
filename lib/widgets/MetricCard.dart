@@ -5,7 +5,8 @@ import 'package:tonal_metrics_widget/styles.dart';
 import 'package:tonal_metrics_widget/widgets/MetricsWidget.dart';
 
 class MetricCard extends StatefulWidget {
-  const MetricCard({Key? key}) : super(key: key);
+  final MetricsModel metricsModel;
+  const MetricCard({Key? key, required this.metricsModel}) : super(key: key);
 
   @override
   _MetricCardState createState() => _MetricCardState();
@@ -17,18 +18,20 @@ class _MetricCardState extends State<MetricCard> {
 
   CarouselController _carouselController = new CarouselController();
 
+
+  //TODO: Create list of independent widgets. Should update from Form Input only if their index is chosen (i.e. "Edit" button clicked while in view)
   List<dynamic> _metricswidget = [
     {
-      'title': 'Upper Body',
-      'image': MetricsWidget(),
+      'title': '',
+      // 'image': MetricsWidget(),
     },
     {
-      'title': 'Core',
-      'image': MetricsWidget(),
+      'title': '',
+      // 'image': MetricsWidget(),
     },
     {
-      'title': 'Lower Body',
-      'image': MetricsWidget(),
+      'title': '',
+      // 'image': MetricsWidget(),
     }
   ];
 
@@ -91,7 +94,7 @@ class _MetricCardState extends State<MetricCard> {
                                   margin: EdgeInsets.only(top: 10),
                                   clipBehavior: Clip.hardEdge,
                                   decoration: bubbleBoxDecoration,
-                                  child: MetricsWidget(),
+                                  child: MetricsWidget(metricsModel: widget.metricsModel,),
                                 ),
                               ],
                             ),
